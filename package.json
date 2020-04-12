@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "babel-node app.js",
+    "seed": "./node_modules/sequelize-cli/lib/sequelize db:seed:all",
     "migrate": "./node_modules/sequelize-cli/lib/sequelize --config config/config.js db:migrate",
     "dev": "npm run migrate && nodemon --exec babel-node app.js"
   },

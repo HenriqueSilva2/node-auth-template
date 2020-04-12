@@ -16,7 +16,7 @@ module.exports = {
           key: "id",
         },
       },
-      IdpId: {
+      idpId: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
