@@ -1,19 +1,14 @@
 import { Model, Sequelize } from "sequelize";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import Idp from "./idp";
+import Role from "./role";
+import UsersHasRoles from "./UsersHasRoles";
+import UsersHasIdps from "./UsersHasIdps";
 
 class User extends Model {
-  static async findByEmail(email, idp = null) {
-    return await User.findOne({
-      where: {
-        email: email.toLowerCase(),
-        idp,
-      },
-    });
-  }
-
-  static init(sequelize, DataTypes) {
-    return super.init(
+  static init(sequelize) {
+    super.init(
       {
         firstName: {
           type: Sequelize.STRING,
@@ -37,6 +32,26 @@ class User extends Model {
         sequelize,
       }
     );
+  }
+  static async findByEmail(email, idp = null) {
+    return await User.findOne({
+      where: {
+        email: email.toLowerCase(),
+        idp,
+      },
+    });
+  }
+  static async associate() {
+    User.belongsToMany(Role, {
+      as: "Roles",
+      through: UsersHasRoles,
+      foreignKey: "userId",
+    });
+    User.belongsToMany(Idp, {
+      as: "Idps",
+      through: UsersHasIdps,
+      foreignKey: "userId",
+    });
   }
 
   signToken() {
