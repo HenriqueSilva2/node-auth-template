@@ -4,6 +4,7 @@ import morgan from "morgan";
 import setupApolloServer from "~/setup/apolloServer";
 import setupPassport from "~/setup/passport";
 import authMiddleWare from "~/setup/middlewares/authMiddleWare";
+import { User, Role } from "~/models";
 
 function setupExpressServer() {
   const app = express();
@@ -12,15 +13,15 @@ function setupExpressServer() {
   return app;
 }
 
-function setup() {
+async function setup() {
   const app = setupExpressServer();
 
-  setupPassport();
+  setupPassport(app);
   setupApolloServer(app);
 
   app.use(
     `/${process.env.GRAPHQL_INTERFACE_URL}` || "/graphql",
-    authMiddleWare()
+    authMiddleWare
   );
 
   app.listen(app.get("port"), () => {
