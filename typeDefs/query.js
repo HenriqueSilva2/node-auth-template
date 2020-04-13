@@ -1,9 +1,8 @@
-import { gql } from "apollo-server-express";
-
-const query = gql`
+const query = `
   type Query {
     secret: String
     test: String
+    getUsers: [User]
   }
 `;
 

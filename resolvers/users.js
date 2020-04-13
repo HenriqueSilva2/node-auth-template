@@ -2,6 +2,7 @@ import { User } from "~/models";
 import { requestGithubUser } from "~/utils/github";
 import { requestFacebookUser } from "~/utils/facebook";
 import { requestGoogleUser } from "~/utils/google";
+import { capitalize } from "lodash";
 
 async function signUp(root, args) {
   const { firstName, lastName, email, password } = args;
@@ -93,7 +94,24 @@ async function authorizeWithGithub(root, { code }) {
 }
 
 export default {
-  Query: {},
+  User: {
+    firstName: ({ firstName }) => capitalize(firstName),
+    lastName: ({ lastName }) => capitalize(lastName),
+    fullName: ({ firstName, lastName }) =>
+      `${capitalize(firstName)} ${capitalize(lastName)}`,
+  },
+  Query: {
+    getUsers: () => {
+      return [
+        {
+          firstName: "henrique",
+          lastName: "silva",
+          email: "joaohenriquesilva@ua.pt",
+          password: "123",
+        },
+      ];
+    },
+  },
   Mutation: {
     authorizeWithGithub,
     authorizeWithFacebook,

@@ -1,6 +1,4 @@
-import { gql } from "apollo-server-express";
-
-const mutation = gql`
+const mutation = `
   type Auth {
     token: String!
   }
