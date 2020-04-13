@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/HenriqueSilva2/node-auth-template#readme",
   "dependencies": {
+    "apollo-server": "^2.12.0",
     "apollo-server-express": "^2.11.0",
     "bcrypt": "^4.0.1",
     "cors": "^2.8.5",
@@ -28,7 +29,10 @@
     "fb": "^2.0.0",
     "google-auth-library": "^6.0.0",
     "graphql": "^14.6.0",
+    "graphql-scalars": "^1.1.0",
+    "graphql-tools": "^4.0.7",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",

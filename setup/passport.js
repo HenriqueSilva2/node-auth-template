@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { User } from "~/models";
+import { Role } from "~/models";
 
 function setupJwtStrategy() {
   passport.use(
@@ -11,7 +12,9 @@ function setupJwtStrategy() {
       },
       async (payload, done) => {
         try {
-          const user = User.findByPk(payload.sub);
+          const user = User.findByPk(payload.sub, {
+            include: [{ model: Role, as: "roles" }],
+          });
           done(null, user);
         } catch (e) {
           done(e, false);

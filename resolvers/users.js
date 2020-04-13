@@ -1,4 +1,4 @@
-import { User } from "~/models";
+import { User, Role } from "~/models";
 import { requestGithubUser } from "~/utils/github";
 import { requestFacebookUser } from "~/utils/facebook";
 import { requestGoogleUser } from "~/utils/google";
@@ -24,8 +24,7 @@ async function signIn(root, args) {
   const { email, password } = args;
   const user = await User.findByEmail(email);
   if (!user) throw new Error("User with that email doesn't exists");
-  if (!user.checkPasswordValid(password))
-    throw new Error("User with that email doesn't exists");
+  if (!user.checkPasswordValid(password)) throw new Error("Invalid password");
   return { token: user.signToken() };
 }
 
@@ -101,15 +100,8 @@ export default {
       `${capitalize(firstName)} ${capitalize(lastName)}`,
   },
   Query: {
-    getUsers: () => {
-      return [
-        {
-          firstName: "henrique",
-          lastName: "silva",
-          email: "joaohenriquesilva@ua.pt",
-          password: "123",
-        },
-      ];
+    getUsers: async () => {
+      return User.findAll({ include: [{ model: Role, as: "roles" }] });
     },
   },
   Mutation: {

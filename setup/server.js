@@ -4,7 +4,6 @@ import morgan from "morgan";
 import setupApolloServer from "~/setup/apolloServer";
 import setupPassport from "~/setup/passport";
 import authMiddleWare from "~/setup/middlewares/authMiddleWare";
-import { User, Role } from "~/models";
 
 function setupExpressServer() {
   const app = express();
@@ -15,14 +14,19 @@ function setupExpressServer() {
 
 async function setup() {
   const app = setupExpressServer();
+  app.use(authMiddleWare);
 
   setupPassport(app);
   setupApolloServer(app);
+  //Example many to many
 
-  app.use(
-    `/${process.env.GRAPHQL_INTERFACE_URL}` || "/graphql",
-    authMiddleWare
-  );
+  // const user = await User.create({
+  //   firstName: "Chair",
+  //   lastName: "sa",
+  //   email: "userRegular",
+  // });
+  // const regularRole = await Role.findByPk("regular");
+  // console.log(user.setRoles([regularRole]));
 
   app.listen(app.get("port"), () => {
     console.log(`Listening on port: ${app.get("port")}`);

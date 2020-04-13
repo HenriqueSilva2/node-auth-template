@@ -33,22 +33,21 @@ class User extends Model {
       }
     );
   }
-  static async findByEmail(email, idp = null) {
+  static async findByEmail(email) {
     return await User.findOne({
       where: {
         email: email.toLowerCase(),
-        idp,
       },
     });
   }
   static async associate() {
     User.belongsToMany(Role, {
-      as: "Roles",
+      as: "roles",
       through: UsersHasRoles,
       foreignKey: "userId",
     });
     User.belongsToMany(Idp, {
-      as: "Idps",
+      as: "idps",
       through: UsersHasIdps,
       foreignKey: "userId",
     });
