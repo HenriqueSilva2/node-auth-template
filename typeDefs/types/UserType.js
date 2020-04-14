@@ -1,5 +1,6 @@
 const userType = `
   type User {
+    id: String
     fullName: String 
     firstName: String 
     lastName: String 

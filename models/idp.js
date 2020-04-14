@@ -18,7 +18,7 @@ class Idp extends Model {
         },
       },
       {
-        tableName: "idpId",
+        tableName: "Idps",
         sequelize,
       }
     );

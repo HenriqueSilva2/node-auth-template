@@ -18,15 +18,6 @@ async function setup() {
 
   setupPassport(app);
   setupApolloServer(app);
-  //Example many to many
-
-  // const user = await User.create({
-  //   firstName: "Chair",
-  //   lastName: "sa",
-  //   email: "userRegular",
-  // });
-  // const regularRole = await Role.findByPk("regular");
-  // console.log(user.setRoles([regularRole]));
 
   app.listen(app.get("port"), () => {
     console.log(`Listening on port: ${app.get("port")}`);

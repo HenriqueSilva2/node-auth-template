@@ -33,7 +33,8 @@ class User extends Model {
       }
     );
   }
-  static async findByEmail(email) {
+  //TODO: Filter by idp
+  static async findByEmail(email, idp = null) {
     return await User.findOne({
       where: {
         email: email.toLowerCase(),

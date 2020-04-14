@@ -6,8 +6,15 @@ var fb = new Facebook({
   appSecret: process.env.FACEBOOK_CLIENT_SECRET,
 });
 
-export const requestFacebookUser = async (credentials) => {
-  const data = await requestFacebookToken(credentials);
+export const getFacebookAuthUrl = () => {
+  return `https://www.facebook.com/v6.0/dialog/oauth?
+    client_id=${process.env.FACEBOOK_CLIENT_ID}
+    &redirect_uri=${process.env.FACEBOOK_CLIENT_REDDIRECT}
+    &state=2`;
+};
+
+export const requestFacebookUser = async (code) => {
+  const data = await requestFacebookToken(code);
   if (data.error) throw new Error("Ocorreu um erro com o codigo");
   const facebookUser = await requestFacebookUserAccount(data.access_token);
   return { ...facebookUser, access_token: data.access_token };
@@ -31,9 +38,9 @@ const requestFacebookUserAccount = (token) => {
   });
 };
 
-const requestFacebookToken = ({ code, client_id, client_secret }) =>
+const requestFacebookToken = (code) =>
   fetch(
-    `https://graph.facebook.com/v6.0/oauth/access_token?client_id=${client_id}&client_secret=${client_secret}&code=${code}&redirect_uri=${process.env.FACEBOOK_CLIENT_REDDIRECT}`
+    `https://graph.facebook.com/v6.0/oauth/access_token?client_id=${process.env.FACEBOOK_CLIENT_ID}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&code=${code}&redirect_uri=${process.env.FACEBOOK_CLIENT_REDDIRECT}`
   )
     .then((res) => res.json())
     .catch((error) => {
