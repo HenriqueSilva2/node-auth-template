@@ -1,6 +1,6 @@
 import { Model, Sequelize } from "sequelize";
 import User from "./user";
-import UsersHasIdps from "./UsersHasIdps";
+import UsersHasIdps from "./usersHasIdps";
 
 class Idp extends Model {
   static init(sequelize) {

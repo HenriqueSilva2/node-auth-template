@@ -1,6 +1,6 @@
 import { Model, Sequelize } from "sequelize";
 import User from "./user";
-import UsersHasRoles from "./UsersHasRoles";
+import UsersHasRoles from "./usersHasRoles";
 
 class Role extends Model {
   static init(sequelize) {

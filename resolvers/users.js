@@ -95,7 +95,7 @@ export default {
   },
   Query: {
     getUsers: async () => {
-      return User.findAll({ include: [{ model: Role, as: "roles" }] });
+      return User.findAll();
     },
   },
   Mutation: {

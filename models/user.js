@@ -3,8 +3,8 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Idp from "./idp";
 import Role from "./role";
-import UsersHasRoles from "./UsersHasRoles";
-import UsersHasIdps from "./UsersHasIdps";
+import UsersHasRoles from "./usersHasRoles";
+import UsersHasIdps from "./usersHasIdps";
 
 class User extends Model {
   static init(sequelize) {
@@ -53,6 +53,11 @@ class User extends Model {
       foreignKey: "userId",
     });
   }
+
+  // // Hooks
+  // static async afterCreate(user) {
+  //   console.log("user created", user);
+  // }
 
   signToken() {
     return jwt.sign(
