@@ -3,7 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import setupApolloServer from "~/setup/apolloServer";
 import setupPassport from "~/setup/passport";
-import authMiddleWare from "~/setup/middlewares/authMiddleWare";
+import authMiddleware from "~/setup/middlewares/authMiddleware";
 
 function setupExpressServer() {
   const app = express();
@@ -14,7 +14,7 @@ function setupExpressServer() {
 
 async function setup() {
   const app = setupExpressServer();
-  app.use(authMiddleWare);
+  app.use(authMiddleware);
 
   setupPassport(app);
   setupApolloServer(app);
