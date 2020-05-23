@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/HenriqueSilva2/node-auth-template.git"
   },
-  "author": "Henrique Silva",
+  "author": "Ytrank",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HenriqueSilva2/node-auth-template/issues"
@@ -24,6 +24,7 @@
     "apollo-server-express": "^2.11.0",
     "bcrypt": "^4.0.1",
     "cors": "^2.8.5",
+    "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fb": "^2.0.0",
@@ -39,7 +40,8 @@
     "passport-jwt": "^4.0.0",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.5"
+    "sequelize": "^5.21.5",
+    "webhook-discord": "^3.7.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

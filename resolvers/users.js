@@ -97,6 +97,10 @@ export default {
     getUsers: async () => {
       return User.findAll();
     },
+    discordTest: (parent, args, { discord }) => {
+      discord.pushMessage("Hello world");
+      return "Message sent to discord";
+    },
   },
   Mutation: {
     authorizeWithGithub,
