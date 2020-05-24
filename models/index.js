@@ -12,13 +12,14 @@ let models = {};
 async function loadModules(currPath) {
   let stat = fs.lstatSync(currPath);
   if (stat.isDirectory()) {
-    const files = fs.readdirSync(currPath);
+    const files = fs.readdirSync(currPath).sort();
     let f,
       l = files.length;
     for (var i = 0; i < l; i++) {
       f = path.join(currPath, files[i]);
       if (files[i] != "index.js") {
         const name = files[i].replace(".js", "");
+        console.log("requiring", name);
         if (require(path.join(currPath, files[i])).default)
           models[
             name.charAt(0).toUpperCase() + name.slice(1)
